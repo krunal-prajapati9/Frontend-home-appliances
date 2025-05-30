@@ -13,7 +13,7 @@ import Header from "./FRONTEND/ADMIN/Header";
 
 import Home from "./FRONTEND/ADMIN/Home";
 import Loginpage from "./FRONTEND/ADMIN/Loginpage";
-import PrivateRoute from "../BACKEND/PrivateRoute";
+import PrivateRoute from "../src/componenet/PrivateRoute"
 import CustomerList from "./FRONTEND/ADMIN/CustomerList";
 import ComplainList from "./FRONTEND/ADMIN/ComplainList";
 import FeedbackList from "./FRONTEND/ADMIN/FeedbackList";
