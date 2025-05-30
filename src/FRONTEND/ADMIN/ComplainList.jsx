@@ -13,21 +13,20 @@ const ComplainList = () => {
       .catch((error) => console.error("Error fetching complains:", error));
   }, []);
 
-  // Rest of your component...
-};
-
-
-  return (<>
-  <Header/>
-    <div className="main-content">
+  return (
+    <>
+      <Header />
+      <div className="main-content">
         <div className="table-wrapper">
-          <h1 style={{ fontWeight: "bolder", fontFamily: "serif" }}>Complain List :</h1>
+          <h1 style={{ fontWeight: "bolder", fontFamily: "serif" }}>
+            Complain List :
+          </h1>
           <table>
             <thead>
               <tr>
-                <th> ID</th>
-                <th> DESCRIPTION</th>
-                <th> ServicProvider_Id</th>
+                <th>ID</th>
+                <th>DESCRIPTION</th>
+                <th>ServiceProvider_Id</th>
                 <th></th>
               </tr>
             </thead>
@@ -37,19 +36,15 @@ const ComplainList = () => {
                   <td>{Complain.complain_id}</td>
                   <td>{Complain.complain_description}</td>
                   <td>{Complain.serviceprovider_id}</td>
-                  <td>
-                  📝 ❗
-                  </td>
+                  <td>📝 ❗</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      </>    
+    </>
   );
-  
-  
-
+};
 
 export default ComplainList;
