@@ -15,48 +15,48 @@ const AirCon = () => {
   const [windowACProducts, setWindowACProducts] = useState([]);
 
   useEffect(() => {
-    const fetchSplitACs = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/airconditioners/split"
-        );
-        setSplitACProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Split ACs:", error);
-      }
-    };
-
-    const fetchWindowACs = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/airconditioners/window"
-        );
-        setWindowACProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Window ACs:", error);
-      }
-    };
-
-    fetchSplitACs();
-    fetchWindowACs();
-  }, []);
-const handleAddToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-    const cartItem = {
-      id: product.product_id, // Unique ID
-      image: `http://localhost:5000/uploads/${product.product_image}`, // Full image URL
-      name: product.product_name,
-      description: product.product_description,
-      price: product.product_price,
-      quantity: 1, // Default quantity
-    };
-  
-    cart.push(cartItem);
-    localStorage.setItem("cart", JSON.stringify(cart));
-      toast.success("Your product is added to Cart successfully!",{position: "top-center"})
+  const fetchSplitACs = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/airconditioners/split`
+      );
+      setSplitACProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Split ACs:", error);
+    }
   };
-  
+
+  const fetchWindowACs = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/airconditioners/window`
+      );
+      setWindowACProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Window ACs:", error);
+    }
+  };
+
+  fetchSplitACs();
+  fetchWindowACs();
+}, []);
+
+const handleAddToCart = (product) => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const cartItem = {
+    id: product.product_id, // Unique ID
+    image: `${import.meta.env.VITE_API_BASE_URL}/uploads/${product.product_image}`, // Full image URL using env variable
+    name: product.product_name,
+    description: product.product_description,
+    price: product.product_price,
+    quantity: 1, // Default quantity
+  };
+
+  cart.push(cartItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  toast.success("Your product is added to Cart successfully!", { position: "top-center" });
+};
 
   return (
     <>

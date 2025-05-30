@@ -53,45 +53,50 @@ const ProductDetails = () => {
         setFormData((prev) => ({ ...prev, subCategory: "" }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+   const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        const formDataToSend = new FormData();
-        formDataToSend.append("productName", formData.productName);
-        formDataToSend.append("description", formData.description);
-        formDataToSend.append("price", formData.price);
-        formDataToSend.append("quantity", formData.quantity);
-        formDataToSend.append("brand", formData.brand);
-        if (formData.image) {
-            formDataToSend.append("image", formData.image);
-        }
-        formDataToSend.append("subCategory", formData.subCategory); // Send subCategory name
+  const formDataToSend = new FormData();
+  formDataToSend.append("productName", formData.productName);
+  formDataToSend.append("description", formData.description);
+  formDataToSend.append("price", formData.price);
+  formDataToSend.append("quantity", formData.quantity);
+  formDataToSend.append("brand", formData.brand);
+  if (formData.image) {
+    formDataToSend.append("image", formData.image);
+  }
+  formDataToSend.append("subCategory", formData.subCategory); // Send subCategory name
 
-        try {
-            const response = await axios.post("http://localhost:5000/add-product",formDataToSend,{ headers: { "Content-Type": "multipart/form-data" } });
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/add-product`,
+      formDataToSend,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
 
-            if (response.status === 200) {
-                alert("Product added successfully!");
-                setFormData({
-                    productName: "",
-                    category: "",
-                    subCategory: "",
-                    description: "",
-                    price: "",
-                    quantity: "",
-                    image: "",
-                    brand: "",
-                    date: "",
-                });
-                setSubCategories([]);
-            } else {
-                alert("Failed to add product");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Error adding product");
-        }
-    };
+    if (response.status === 200) {
+      alert("Product added successfully!");
+      setFormData({
+        productName: "",
+        category: "",
+        subCategory: "",
+        description: "",
+        price: "",
+        quantity: "",
+        image: "",
+        brand: "",
+        date: "",
+      });
+      setSubCategories([]);
+    } else {
+      alert("Failed to add product");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error adding product");
+  }
+};
+
 
     return (
         <>

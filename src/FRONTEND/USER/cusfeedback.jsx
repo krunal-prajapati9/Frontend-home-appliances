@@ -19,19 +19,23 @@ function Cusfeedback() {
         return;
     }
 
-    try {
-        const response = await axios.post("http://localhost:5000/submit-feedback", { user_id, feedback });
+   try {
+  const response = await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/submit-feedback`,
+    { user_id, feedback }
+  );
 
-        if (response.data.success) {
-            toast.success("Feedback Submitted Successfully!", { position: "top-center" });
-            setFeedback(""); // Clear input field
-        } else {
-            toast.error("Failed to submit feedback");
-        }
-    } catch (error) {
-        console.error("Error submitting feedback:", error);
-        toast.error("An error occurred. Please try again.");
-    }
+  if (response.data.success) {
+    toast.success("Feedback Submitted Successfully!", { position: "top-center" });
+    setFeedback(""); // Clear input field
+  } else {
+    toast.error("Failed to submit feedback");
+  }
+} catch (error) {
+  console.error("Error submitting feedback:", error);
+  toast.error("An error occurred. Please try again.");
+}
+
 };
 
 

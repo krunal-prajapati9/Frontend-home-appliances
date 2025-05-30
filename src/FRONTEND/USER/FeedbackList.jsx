@@ -16,17 +16,18 @@ const CustomerFeedbackList = () => {
   const fetchFeedback = async () => {
     setLoading(true);
     try {
-      let url = "http://localhost:5000/userfeedbacklist";
-      if (startDate && endDate) {
-        url += `?start_date=${startDate}&end_date=${endDate}`;
-      }
-      const response = await axios.get(url);
-      setFeedback(response.data.feedback);
-    } catch (err) {
-      setError("Error fetching feedback. Try again later.");
-    } finally {
-      setLoading(false);
-    }
+  let url = `${import.meta.env.VITE_API_BASE_URL}/userfeedbacklist`;
+  if (startDate && endDate) {
+    url += `?start_date=${startDate}&end_date=${endDate}`;
+  }
+  const response = await axios.get(url);
+  setFeedback(response.data.feedback);
+} catch (err) {
+  setError("Error fetching feedback. Try again later.");
+} finally {
+  setLoading(false);
+}
+
   };
 
   useEffect(() => {

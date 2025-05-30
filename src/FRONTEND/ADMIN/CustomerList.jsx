@@ -8,16 +8,15 @@ const CustomerList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/customerslist")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/customerslist`)
       .then((response) => setCustomers(response.data))
       .catch((error) => console.error("Error fetching customers:", error));
   }, []);
 
-
   const deleteCustomer = async (userId) => {
     if (window.confirm("Are you sure?")) {
       try {
-        await axios.delete(`http://localhost:5000/customer/${userId}`);
+        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/customer/${userId}`);
         setCustomers(
           customers.filter((customer) => customer.user_id !== userId)
         );
@@ -27,6 +26,8 @@ const CustomerList = () => {
     }
   };
 
+  // Rest of your component JSX...
+};
 
 
   
@@ -76,6 +77,5 @@ const CustomerList = () => {
     </div>
     </>
   );
-};
 
 export default CustomerList;

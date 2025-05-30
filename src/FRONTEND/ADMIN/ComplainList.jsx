@@ -8,10 +8,14 @@ const ComplainList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/complainlist")
-      .then((response) => setComplains(response.data)) // Updated from setCustomers to setComplains
+      .get(`${import.meta.env.VITE_API_BASE_URL}/complainlist`)
+      .then((response) => setComplains(response.data))
       .catch((error) => console.error("Error fetching complains:", error));
   }, []);
+
+  // Rest of your component...
+};
+
 
   return (<>
   <Header/>
@@ -46,6 +50,6 @@ const ComplainList = () => {
   );
   
   
-};
+
 
 export default ComplainList;

@@ -34,19 +34,22 @@ const UserRegistrationPage = () => {
     //   setError("Passwords do not match.");
     //   return;
     // }
-
-    try {
-      const response = await axios.post("http://localhost:5000/api/serviceproviderregister", {
-        userName,
-        userContact,
-        userEmail,
-        password,
-      });
-      setSuccess(response.data.message);
-      setFormData({ userName: "", userContact: "", userEmail: "", password: "",});
-    } catch (err) {
-      setError(err.response?.data?.error || "Registration failed.");
+try {
+  const response = await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/api/serviceproviderregister`,
+    {
+      userName,
+      userContact,
+      userEmail,
+      password,
     }
+  );
+  setSuccess(response.data.message);
+  setFormData({ userName: "", userContact: "", userEmail: "", password: "" });
+} catch (err) {
+  setError(err.response?.data?.error || "Registration failed.");
+}
+
   };
 
   return (

@@ -17,25 +17,29 @@ const CusLogin = () => {
     e.preventDefault();
     setError("");
 
-    try {
-      const response = await axios.post("http://localhost:5000/api/login", {
-        email,
-        password,
-      });
-
-      if (response.data.success) {
-        localStorage.setItem("token", response.data.token); // Store JWT token
-        localStorage.setItem("user_id", response.data.user_id); // Store user ID
-        toast.success("Login successful!", { position: "top-center" });
-        navigate("/"); // Redirect to dashboard or any page after login
-      } else {
-        setError(response.data.message);
-        toast.error(response.data.message, { position: "top-center" });
-      }
-    } catch (error) {
-      setError("Invalid email or password");
-      toast.error("Invalid email or password", { position: "top-center" });
+   try {
+  const response = await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/api/login`,
+    {
+      email,
+      password,
     }
+  );
+
+  if (response.data.success) {
+    localStorage.setItem("token", response.data.token); // Store JWT token
+    localStorage.setItem("user_id", response.data.user_id); // Store user ID
+    toast.success("Login successful!", { position: "top-center" });
+    navigate("/"); // Redirect to dashboard or any page after login
+  } else {
+    setError(response.data.message);
+    toast.error(response.data.message, { position: "top-center" });
+  }
+} catch (error) {
+  setError("Invalid email or password");
+  toast.error("Invalid email or password", { position: "top-center" });
+}
+
   };
 
   return (

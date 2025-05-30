@@ -15,27 +15,28 @@ const WashingM = () => {
   const [frontLoadProducts, setFrontLoadProducts] = useState([]);
 
   useEffect(() => {
-    const fetchTopLoadWashingMachines = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/washingmachines/topload"
-        );
-        setTopLoadProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Top Load washing machines:", error);
-      }
-    };
+  const fetchTopLoadWashingMachines = async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/washingmachines/topload`
+    );
+    setTopLoadProducts(response.data);
+  } catch (error) {
+    console.error("Error fetching Top Load washing machines:", error);
+  }
+};
 
-    const fetchFrontLoadWashingMachines = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/washingmachines/frontload"
-        );
-        setFrontLoadProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Front Load washing machines:", error);
-      }
-    };
+const fetchFrontLoadWashingMachines = async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/washingmachines/frontload`
+    );
+    setFrontLoadProducts(response.data);
+  } catch (error) {
+    console.error("Error fetching Front Load washing machines:", error);
+  }
+};
+
 
     fetchTopLoadWashingMachines();
     fetchFrontLoadWashingMachines();

@@ -13,21 +13,22 @@ const CustomerComplaintList = () => {
   // Get today's date in YYYY-MM-DD format
   const today = new Date().toISOString().split("T")[0];
 
-  const fetchComplaints = async () => {
-    setLoading(true);
-    try {
-      let url = "http://localhost:5000/usercomplainlist";
-      if (startDate && endDate) {
-        url += `?start_date=${startDate}&end_date=${endDate}`;
-      }
-      const response = await axios.get(url);
-      setComplaints(response.data.complaints);
-    } catch (err) {
-      setError("Error fetching complaints. Try again later.");
-    } finally {
-      setLoading(false);
+ const fetchComplaints = async () => {
+  setLoading(true);
+  try {
+    let url = `${import.meta.env.VITE_API_BASE_URL}/usercomplainlist`;
+    if (startDate && endDate) {
+      url += `?start_date=${startDate}&end_date=${endDate}`;
     }
-  };
+    const response = await axios.get(url);
+    setComplaints(response.data.complaints);
+  } catch (err) {
+    setError("Error fetching complaints. Try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchComplaints();

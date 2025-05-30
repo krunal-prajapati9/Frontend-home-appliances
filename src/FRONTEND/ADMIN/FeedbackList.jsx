@@ -8,10 +8,14 @@ const FeedbackList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/feedbacklist")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/feedbacklist`)
       .then((response) => setFeedbacks(response.data))
       .catch((error) => console.error("Error fetching feedbacks:", error));
-  },); 
+  }, []);  // Empty dependency array added
+
+  // Rest of your component JSX...
+};
+
   return (<>
     <Header/>
     <div className="main-content">
@@ -44,6 +48,5 @@ const FeedbackList = () => {
     </div>
     </>
   );
-};
 
 export default FeedbackList;

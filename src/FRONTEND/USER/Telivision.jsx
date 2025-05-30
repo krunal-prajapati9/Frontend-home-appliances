@@ -14,51 +14,52 @@ const Telivision = () => {
   const [ledProducts, setLedProducts] = useState([]);
   const [qledProducts, setQledProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchLedTelevisions = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/televisions/led"
-        );
-        setLedProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching LED televisions:", error);
-      }
-    };
-
-    const fetchQledTelevisions = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/televisions/qled"
-        );
-        setQledProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching QLED televisions:", error);
-      }
-    };
-
-    fetchLedTelevisions();
-    fetchQledTelevisions();
-  }, []);
-
-  const handleAddToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const cartItem = {
-      id: product.product_id, // Unique ID
-      image: `http://localhost:5000/uploads/${product.product_image}`, // Full image URL
-      name: product.product_name,
-      description: product.product_description,
-      price: product.product_price,
-      quantity: 1, // Default quantity
-    };
-
-    cart.push(cartItem);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("Your product is added to Cart successfully!", {
-      position: "top-center",
-    });
+ useEffect(() => {
+  const fetchLedTelevisions = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/televisions/led`
+      );
+      setLedProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching LED televisions:", error);
+    }
   };
+
+  const fetchQledTelevisions = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/televisions/qled`
+      );
+      setQledProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching QLED televisions:", error);
+    }
+  };
+
+  fetchLedTelevisions();
+  fetchQledTelevisions();
+}, []);
+
+const handleAddToCart = (product) => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const cartItem = {
+    id: product.product_id,
+    image: `${import.meta.env.VITE_API_BASE_URL}/uploads/${product.product_image}`,
+    name: product.product_name,
+    description: product.product_description,
+    price: product.product_price,
+    quantity: 1,
+  };
+
+  cart.push(cartItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  toast.success("Your product is added to Cart successfully!", {
+    position: "top-center",
+  });
+};
+
 
   return (
     <>

@@ -30,17 +30,17 @@ function CategoryForm({ category, fetchCategories, setSelectedCategory }) {
     e.preventDefault();
     if (!validateName()) return;
 
-    try {
-      await axios.put(
-        `http://localhost:5000/categories/${category.productcategory_id}`,
-        { name, description }
-      );
-      fetchCategories();
-      setSelectedCategory(null);
-    } catch (error) {
-      console.error("Error updating category:", error);
-    }
-  };
+   try {
+  await axios.put(
+    `${import.meta.env.VITE_API_BASE_URL}/categories/${category.productcategory_id}`,
+    { name, description }
+  );
+  fetchCategories();
+  setSelectedCategory(null);
+} catch (error) {
+  console.error("Error updating category:", error);
+}
+
 
   return (
     category && (
@@ -74,6 +74,6 @@ function CategoryForm({ category, fetchCategories, setSelectedCategory }) {
       </form>
     )
   );
-}
+}}
 
 export default CategoryForm;

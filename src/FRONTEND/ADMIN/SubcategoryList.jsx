@@ -11,26 +11,26 @@ function SubcategoryList({ categoryId }) {
   }, [categoryId]);
 
   const fetchSubcategories = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/categories/${categoryId}/subcategories`
-      );
-      setSubcategories(response.data);
-    } catch (error) {
-      console.error("Error fetching subcategories:", error);
-    }
-  };
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/categories/${categoryId}/subcategories`
+    );
+    setSubcategories(response.data);
+  } catch (error) {
+    console.error("Error fetching subcategories:", error);
+  }
+};
 
-  const handleDelete = async (subcategoryId) => {
-    if (window.confirm("Are you sure you want to delete this subcategory?")) {
-      try {
-        await axios.delete(`http://localhost:5000/subcategories/${subcategoryId}`);
-        fetchSubcategories(); // Refresh list
-      } catch (error) {
-        console.error("Error deleting subcategory:", error);
-      }
+const handleDelete = async (subcategoryId) => {
+  if (window.confirm("Are you sure you want to delete this subcategory?")) {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/subcategories/${subcategoryId}`);
+      fetchSubcategories(); // Refresh list
+    } catch (error) {
+      console.error("Error deleting subcategory:", error);
     }
-  };
+  }
+};
 
   return (
     <div className="subcategory-list">

@@ -39,28 +39,29 @@ function SubcategoryForm({
     return true;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateName()) return;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validateName()) return;
 
-    try {
-      if (subcategory) {
-        await axios.put(
-          `http://localhost:5000/subcategories/${subcategory.p_sub_cata_id}`,
-          { name, description, category_id: categoryId }
-        );
-      } else {
-        await axios.post(
-          `http://localhost:5000/categories/${categoryId}/subcategories`,
-          { name, description }
-        );
-      }
-      fetchSubcategories(); // Refresh list
-      setSelectedSubcategory(null); // Close form
-    } catch (error) {
-      console.error("Error saving subcategory:", error);
+  try {
+    if (subcategory) {
+      await axios.put(
+        `${import.meta.env.VITE_API_BASE_URL}/subcategories/${subcategory.p_sub_cata_id}`,
+        { name, description, category_id: categoryId }
+      );
+    } else {
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/categories/${categoryId}/subcategories`,
+        { name, description }
+      );
     }
-  };
+    fetchSubcategories(); // Refresh list
+    setSelectedSubcategory(null); // Close form
+  } catch (error) {
+    console.error("Error saving subcategory:", error);
+  }
+};
+
 
   return (
     <form className="subcategory-form" onSubmit={handleSubmit}>

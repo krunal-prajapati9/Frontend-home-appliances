@@ -34,18 +34,28 @@ const UserRegistrationPage = () => {
     //   return;
     // }
 
-    try {
-      const response = await axios.post("http://localhost:5000/api/register", {
-        userName,
-        userContact,
-        userEmail,
-        password,
-      });
-      setSuccess(response.data.message);
-      setFormData({ userName: "", userContact: "", userEmail: "", password: "", confirmPassword: "" });
-    } catch (err) {
-      setError(err.response?.data?.error || "Registration failed.");
+   try {
+  const response = await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/api/register`,
+    {
+      userName,
+      userContact,
+      userEmail,
+      password,
     }
+  );
+  setSuccess(response.data.message);
+  setFormData({
+    userName: "",
+    userContact: "",
+    userEmail: "",
+    password: "",
+    confirmPassword: "",
+  });
+} catch (err) {
+  setError(err.response?.data?.error || "Registration failed.");
+}
+
   };
 
   return (

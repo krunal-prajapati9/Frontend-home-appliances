@@ -15,75 +15,76 @@ const Fridge = () => {
   const [tripleDoorProducts, setTripleDoorProducts] = useState([]);
   const [sideBySideProducts, setSideBySideProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchSingleDoorRefrigerators = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/refrigerators/singledoor"
-        );
-        setSingleDoorProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Single Door refrigerators:", error);
-      }
-    };
-
-    const fetchDoubleDoorRefrigerators = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/refrigerators/doubledoor"
-        );
-        setDoubleDoorProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Double Door refrigerators:", error);
-      }
-    };
-
-    const fetchTripleDoorRefrigerators = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/refrigerators/tripledoor"
-        );
-        setTripleDoorProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Triple Door refrigerators:", error);
-      }
-    };
-
-    const fetchSideBySideRefrigerators = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/refrigerators/sidebyside"
-        );
-        setSideBySideProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching Side-by-Side refrigerators:", error);
-      }
-    };
-
-    fetchSingleDoorRefrigerators();
-    fetchDoubleDoorRefrigerators();
-    fetchTripleDoorRefrigerators();
-    fetchSideBySideRefrigerators();
-  }, []);
-
-  const handleAddToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const cartItem = {
-      id: product.product_id, // Unique ID
-      image: `http://localhost:5000/uploads/${product.product_image}`, // Full image URL
-      name: product.product_name,
-      description: product.product_description,
-      price: product.product_price,
-      quantity: 1, // Default quantity
-    };
-
-    cart.push(cartItem);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("Your product is added to Cart successfully!", {
-      position: "top-center",
-    });
+ useEffect(() => {
+  const fetchSingleDoorRefrigerators = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/refrigerators/singledoor`
+      );
+      setSingleDoorProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Single Door refrigerators:", error);
+    }
   };
+
+  const fetchDoubleDoorRefrigerators = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/refrigerators/doubledoor`
+      );
+      setDoubleDoorProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Double Door refrigerators:", error);
+    }
+  };
+
+  const fetchTripleDoorRefrigerators = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/refrigerators/tripledoor`
+      );
+      setTripleDoorProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Triple Door refrigerators:", error);
+    }
+  };
+
+  const fetchSideBySideRefrigerators = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/api/refrigerators/sidebyside`
+      );
+      setSideBySideProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching Side-by-Side refrigerators:", error);
+    }
+  };
+
+  fetchSingleDoorRefrigerators();
+  fetchDoubleDoorRefrigerators();
+  fetchTripleDoorRefrigerators();
+  fetchSideBySideRefrigerators();
+}, []);
+
+const handleAddToCart = (product) => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const cartItem = {
+    id: product.product_id,
+    image: `${import.meta.env.VITE_API_BASE_URL}/uploads/${product.product_image}`,
+    name: product.product_name,
+    description: product.product_description,
+    price: product.product_price,
+    quantity: 1,
+  };
+
+  cart.push(cartItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  toast.success("Your product is added to Cart successfully!", {
+    position: "top-center",
+  });
+};
+
 
   return (
     <>
