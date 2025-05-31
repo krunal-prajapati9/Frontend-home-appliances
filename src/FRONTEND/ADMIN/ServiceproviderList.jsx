@@ -43,11 +43,7 @@ const ServiceProviderList = () => {
     }
   };
 
-  // Rest of your component JSX...
-};
-
-
-  return (
+ return (
     <>
       <Header />
       <div className="main-content">
@@ -94,5 +90,9 @@ const ServiceProviderList = () => {
       </div>
     </>
   );
+};
+
+
+ 
 
 export default ServiceProviderList;
