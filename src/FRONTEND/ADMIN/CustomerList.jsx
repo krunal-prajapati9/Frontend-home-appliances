@@ -25,13 +25,6 @@ const CustomerList = () => {
       }
     }
   };
-
-  // Rest of your component JSX...
-};
-
-
-  
-
   return (<>
     <Header/>
     <div className="main-content">
@@ -77,5 +70,11 @@ const CustomerList = () => {
     </div>
     </>
   );
+};
+
+
+  
+
+
 
 export default CustomerList;
